@@ -24,24 +24,19 @@ public class SearchProblemTest {
         );
 
         wordsPreprocessor.processWords(bufferedReader);
-        SearchProblem problem = new SearchProblem("white", "green", true,
+        SearchProblem problem = new SearchProblem("white", "green",
                 wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
         List<String> children = problem.getChildren();
         Assert.assertEquals(new LinkedList<>(Arrays.asList("teamwork", "team")), children);
 
-        problem = new SearchProblem("teamwork", "green", true,
+        problem = new SearchProblem("teamwork", "green",
                 wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
         children = problem.getChildren();
-        Assert.assertEquals(new LinkedList<>(), children);
+        Assert.assertEquals(new LinkedList<>(Arrays.asList("white", "enumerate")), children);
 
-        problem = new SearchProblem("white", "green", false,
+        problem = new SearchProblem("enumerate", "green",
                 wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
         children = problem.getChildren();
-        Assert.assertEquals(new LinkedList<>(), children);
-
-        problem = new SearchProblem("enumerate", "green", false,
-                wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
-        children = problem.getChildren();
-        Assert.assertEquals(Collections.singletonList("green"), children);
+        Assert.assertEquals(new LinkedList<>(Arrays.asList("teamwork", "team", "green")), children);
     }
 }
