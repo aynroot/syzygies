@@ -1,21 +1,16 @@
 package com.chernenko.valeria;
 
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 
 public class WordsPreprocessor {
-    HashMap<String, LinkedList<String>> wordsByPrefix = new HashMap<>();
-    HashMap<String, LinkedList<String>> wordsBySuffix = new HashMap<>();
-
-    public static void main(String[] args) {
-        String wordsFilePath = args[0];
-
-        WordsPreprocessor wp = new WordsPreprocessor();
-        wp.processWordsFile(wordsFilePath);
-    }
+    private HashMap<String, LinkedList<String>> wordsByPrefix = new HashMap<>();
+    private HashMap<String, LinkedList<String>> wordsBySuffix = new HashMap<>();
 
     private void putWord(HashMap<String, LinkedList<String>> container, String key, String word) {
         if (container.containsKey(key)) {
@@ -27,7 +22,7 @@ public class WordsPreprocessor {
         }
     }
 
-    private void processWordsFile(String filePath) {
+    public void processWordsFile(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             for(String line; (line = br.readLine()) != null;) {
                 String word = line.trim().toLowerCase();
@@ -38,13 +33,18 @@ public class WordsPreprocessor {
                 putWord(wordsByPrefix, prefix, word);
                 putWord(wordsBySuffix, suffix, word);
             }
-
-            System.out.println(String.format("Number of prefixes: %d", wordsByPrefix.size()));
-            System.out.println(String.format("Number of suffixes: %d", wordsBySuffix.size()));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(String.format("Specified path (%s) not found.", filePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public HashMap<String, LinkedList<String>> getWordsByPrefix() {
+        return wordsByPrefix;
+    }
+
+    public HashMap<String, LinkedList<String>> getWordsBySuffix() {
+        return wordsBySuffix;
     }
 }
