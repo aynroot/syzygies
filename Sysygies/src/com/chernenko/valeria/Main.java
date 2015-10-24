@@ -13,6 +13,11 @@ public class Main {
         String start = args[1];
         String goal = args[2];
 
+        if (start.length() < 2) {
+            System.out.println("FAILURE");
+            return;
+        }
+
         WordsPreprocessor wordsPreprocessor = new WordsPreprocessor();
         wordsPreprocessor.processWords(WordsPreprocessor.getBufferedReader(wordsFilePath));
         logger.info("Successfully read words and constructed prefix/suffix lists.");
