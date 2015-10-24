@@ -14,7 +14,7 @@ public class DepthLimitedSearch {
 
     public SearchResult run() {
         if (problem.getGoal().equals(problem.getStart())) {
-            problem.setSolution(new SearchSolution(new LinkedList<>(Collections.singletonList(problem.getStart()))));
+            problem.setSolution(null);
             return SearchResult.SUCCESS;
         } else if (limit == 0) {
             return SearchResult.CUTOFF;
@@ -26,7 +26,7 @@ public class DepthLimitedSearch {
                 if (result.equals(SearchResult.CUTOFF)) {
                     cutoffOccurred = true;
                 } else if (result.equals(SearchResult.SUCCESS)) {
-                    problem.setSolution(new SearchSolution(problem.getStart(), childProblem.getSolution()));
+                    problem.setSolution(childProblem);
                     return result;
                 }
             }

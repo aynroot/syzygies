@@ -1,5 +1,6 @@
 package com.chernenko.valeria;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,7 +49,12 @@ public class SearchProblem {
         return solution;
     }
 
-    public void setSolution(SearchSolution solution) {
-        this.solution = solution;
+    public void setSolution(SearchProblem childProblem) {
+        if (childProblem != null) {
+            this.solution = new SearchSolution(start, childProblem.getSolution());
+            childProblem.solution = null;
+        } else {
+            this.solution = new SearchSolution(new LinkedList<>(Collections.singletonList(start)));
+        }
     }
 }

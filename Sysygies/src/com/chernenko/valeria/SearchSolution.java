@@ -12,7 +12,6 @@ public class SearchSolution {
     }
 
     public SearchSolution(String start, SearchSolution childSolution) {
-        assert childSolution != null;
         steps = new LinkedList<>(Collections.singletonList(start));
         steps.addAll(childSolution.steps);
     }
