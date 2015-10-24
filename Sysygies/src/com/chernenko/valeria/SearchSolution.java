@@ -19,8 +19,4 @@ public class SearchSolution {
     public List<String> getSteps() {
         return steps;
     }
-
-    public int size() {
-        return steps.size();
-    }
 }
