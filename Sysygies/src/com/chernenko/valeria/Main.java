@@ -14,7 +14,7 @@ public class Main {
         String goal = args[2];
 
         WordsPreprocessor wordsPreprocessor = new WordsPreprocessor();
-        wordsPreprocessor.processWordsFile(wordsFilePath);
+        wordsPreprocessor.processWords(WordsPreprocessor.getBufferedReader(wordsFilePath));
         logger.info("Successfully read words and constructed prefix/suffix lists.");
         logger.info(String.format("Prefix list size: %d.", wordsPreprocessor.getWordsByPrefix().size()));
         logger.info(String.format("Suffix list size: %d.", wordsPreprocessor.getWordsBySuffix().size()));
