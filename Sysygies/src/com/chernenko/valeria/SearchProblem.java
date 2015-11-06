@@ -8,24 +8,24 @@ import java.util.List;
 public class SearchProblem {
     private final String start;
     private final String goal;
-    private final HashMap<String, LinkedList<String>> wordsByPrefix;
-    private final HashMap<String, LinkedList<String>> wordsBySuffix;
+    private final HashMap<String, LinkedList<String>> childrenByPrefix;
+    private final HashMap<String, LinkedList<String>> childrenBySuffix;
     private SearchSolution solution = null;
 
     public SearchProblem(String start, String goal,
-                         HashMap<String, LinkedList<String>> wordsByPrefix,
-                         HashMap<String, LinkedList<String>> wordsBySuffix) {
+                         HashMap<String, LinkedList<String>> childrenByPrefix,
+                         HashMap<String, LinkedList<String>> childrenBySuffix) {
         this.start = start;
         this.goal = goal;
-        this.wordsByPrefix = wordsByPrefix;
-        this.wordsBySuffix = wordsBySuffix;
+        this.childrenByPrefix = childrenByPrefix;
+        this.childrenBySuffix = childrenBySuffix;
     }
 
     public SearchProblem(String start, SearchProblem parentProblem) {
         this.start = start;
         this.goal = parentProblem.goal;
-        this.wordsByPrefix = parentProblem.wordsByPrefix;
-        this.wordsBySuffix = parentProblem.wordsBySuffix;
+        this.childrenByPrefix = parentProblem.childrenByPrefix;
+        this.childrenBySuffix = parentProblem.childrenBySuffix;
     }
 
     public String getGoal() {
@@ -40,8 +40,8 @@ public class SearchProblem {
         LinkedList<String> result;
         String prefix = start.substring(0, 2);
         String suffix = start.substring(start.length() - 2, start.length());
-        result = wordsByPrefix.getOrDefault(suffix, new LinkedList<>());
-        result.addAll(wordsBySuffix.getOrDefault(prefix, new LinkedList<>()));
+        result = childrenByPrefix.getOrDefault(prefix, new LinkedList<>());
+        result.addAll(childrenBySuffix.getOrDefault(suffix, new LinkedList<>()));
         return result;
     }
 

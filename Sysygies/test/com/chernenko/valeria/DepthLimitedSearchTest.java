@@ -18,7 +18,7 @@ public class DepthLimitedSearchTest {
 
         wordsPreprocessor.processWords(bufferedReader);
         SearchProblem problem = new SearchProblem("white", "green",
-                wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
+                wordsPreprocessor.getChildrenByPrefix(), wordsPreprocessor.getChildrenBySuffix());
         DepthLimitedSearch depthLimitedSearch = new DepthLimitedSearch(problem, 1);
         SearchResult result = depthLimitedSearch.run();
         Assert.assertEquals(result, SearchResult.CUTOFF);
@@ -46,7 +46,7 @@ public class DepthLimitedSearchTest {
 
         wordsPreprocessor.processWords(bufferedReader);
         SearchProblem problem = new SearchProblem("white", "green",
-                wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
+                wordsPreprocessor.getChildrenByPrefix(), wordsPreprocessor.getChildrenBySuffix());
         DepthLimitedSearch depthLimitedSearch = new DepthLimitedSearch(problem, 1);
         SearchResult result = depthLimitedSearch.run();
         Assert.assertEquals(result, SearchResult.CUTOFF);
@@ -61,7 +61,7 @@ public class DepthLimitedSearchTest {
 
         depthLimitedSearch = new DepthLimitedSearch(problem, 4);
         result = depthLimitedSearch.run();
-        Assert.assertEquals(result, SearchResult.FAILURE);
-        // TODO: make a set of visited nodes, unless we get a infinite loop
+        Assert.assertEquals(result, SearchResult.CUTOFF);
+        // it is okay to have CUTOFF here, because we allow duplicated words
     }
 }

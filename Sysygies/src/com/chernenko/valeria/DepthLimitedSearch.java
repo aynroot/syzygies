@@ -1,7 +1,5 @@
 package com.chernenko.valeria;
 
-import java.util.Collections;
-import java.util.LinkedList;
 
 public class DepthLimitedSearch {
     private final int limit;

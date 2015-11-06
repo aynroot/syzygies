@@ -20,19 +20,19 @@ public class WordsPreprocessorTest {
               "white", "teamwork", "team", "a", "enumerate", "green", null
         );
         HashMap<String, LinkedList<String>> expectedByPrefix = new HashMap<>();
-        expectedByPrefix.put("te", new LinkedList<>(Arrays.asList("teamwork", "team")));
-        expectedByPrefix.put("en", new LinkedList<>(Collections.singletonList("enumerate")));
-        expectedByPrefix.put("wh", new LinkedList<>(Collections.singletonList("white")));
-        expectedByPrefix.put("gr", new LinkedList<>(Collections.singletonList("green")));
+        expectedByPrefix.put("te", new LinkedList<>(Arrays.asList("white", "enumerate")));
+        expectedByPrefix.put("en", new LinkedList<>(Collections.singletonList("green")));
+        expectedByPrefix.put("rk", new LinkedList<>(Collections.singletonList("teamwork")));
+        expectedByPrefix.put("am", new LinkedList<>(Collections.singletonList("team")));
 
         HashMap<String, LinkedList<String>> expectedBySuffix = new HashMap<>();
-        expectedBySuffix.put("te", new LinkedList<>(Arrays.asList("white", "enumerate")));
-        expectedBySuffix.put("rk", new LinkedList<>(Collections.singletonList("teamwork")));
-        expectedBySuffix.put("am", new LinkedList<>(Collections.singletonList("team")));
-        expectedBySuffix.put("en", new LinkedList<>(Collections.singletonList("green")));
+        expectedBySuffix.put("wh", new LinkedList<>(Collections.singletonList("white")));
+        expectedBySuffix.put("te", new LinkedList<>(Arrays.asList("teamwork", "team")));
+        expectedBySuffix.put("en", new LinkedList<>(Collections.singletonList("enumerate")));
+        expectedBySuffix.put("gr", new LinkedList<>(Collections.singletonList("green")));
 
         wordsPreprocessor.processWords(bufferedReader);
-        Assert.assertEquals(expectedByPrefix, wordsPreprocessor.getWordsByPrefix());
-        Assert.assertEquals(expectedBySuffix, wordsPreprocessor.getWordsBySuffix());
+        Assert.assertEquals(expectedByPrefix, wordsPreprocessor.getChildrenByPrefix());
+        Assert.assertEquals(expectedBySuffix, wordsPreprocessor.getChildrenBySuffix());
     }
 }

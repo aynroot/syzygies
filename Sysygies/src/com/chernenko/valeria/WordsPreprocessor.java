@@ -10,6 +10,8 @@ import java.util.LinkedList;
 public class WordsPreprocessor {
     private HashMap<String, LinkedList<String>> wordsByPrefix = new HashMap<>();
     private HashMap<String, LinkedList<String>> wordsBySuffix = new HashMap<>();
+    private HashMap<String, LinkedList<String>> childrenByPrefix = new HashMap<>();
+    private HashMap<String, LinkedList<String>> childrenBySuffix = new HashMap<>();
 
     private void putWord(HashMap<String, LinkedList<String>> container, String key, String word) {
         if (container.containsKey(key)) {
@@ -44,13 +46,22 @@ public class WordsPreprocessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        for (String prefix: wordsByPrefix.keySet()) {
+            LinkedList<String> words = wordsByPrefix.get(prefix);
+            childrenBySuffix.put(prefix, words);
+        }
+        for (String suffix: wordsBySuffix.keySet()) {
+            LinkedList<String> words = wordsBySuffix.get(suffix);
+            childrenByPrefix.put(suffix, words);
+        }
     }
 
-    public HashMap<String, LinkedList<String>> getWordsByPrefix() {
-        return wordsByPrefix;
+    public HashMap<String, LinkedList<String>> getChildrenByPrefix() {
+        return childrenByPrefix;
     }
 
-    public HashMap<String, LinkedList<String>> getWordsBySuffix() {
-        return wordsBySuffix;
+    public HashMap<String, LinkedList<String>> getChildrenBySuffix() {
+        return childrenBySuffix;
     }
 }

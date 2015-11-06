@@ -3,15 +3,11 @@ package com.chernenko.valeria;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import sun.plugin.javascript.navig.Link;
 
 import java.io.BufferedReader;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class SearchProblemTest {
 
@@ -25,18 +21,18 @@ public class SearchProblemTest {
 
         wordsPreprocessor.processWords(bufferedReader);
         SearchProblem problem = new SearchProblem("white", "green",
-                wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
+                wordsPreprocessor.getChildrenByPrefix(), wordsPreprocessor.getChildrenBySuffix());
         List<String> children = problem.getChildren();
         Assert.assertEquals(new LinkedList<>(Arrays.asList("teamwork", "team")), children);
 
         problem = new SearchProblem("teamwork", "green",
-                wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
+                wordsPreprocessor.getChildrenByPrefix(), wordsPreprocessor.getChildrenBySuffix());
         children = problem.getChildren();
         Assert.assertEquals(new LinkedList<>(Arrays.asList("white", "enumerate")), children);
 
         problem = new SearchProblem("enumerate", "green",
-                wordsPreprocessor.getWordsByPrefix(), wordsPreprocessor.getWordsBySuffix());
+                wordsPreprocessor.getChildrenByPrefix(), wordsPreprocessor.getChildrenBySuffix());
         children = problem.getChildren();
-        Assert.assertEquals(new LinkedList<>(Arrays.asList("teamwork", "team", "green")), children);
+        Assert.assertEquals(new LinkedList<>(Arrays.asList("green", "teamwork", "team")), children);
     }
 }
