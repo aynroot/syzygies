@@ -7,7 +7,6 @@ public class SearchProblem {
     private final String goal;
     private final HashMap<String, LinkedList<String>> childrenByPrefix;
     private final HashMap<String, LinkedList<String>> childrenBySuffix;
-    private HashSet<String> usedWords = null;
     private SearchSolution solution = null;
 
     public SearchProblem(String start, String goal,
@@ -38,7 +37,7 @@ public class SearchProblem {
         LinkedList<String> result;
         String prefix = start.substring(0, 2);
         String suffix = start.substring(start.length() - 2, start.length());
-        result = childrenByPrefix.getOrDefault(prefix, new LinkedList<>());
+        result = new LinkedList<>(childrenByPrefix.getOrDefault(prefix, new LinkedList<>()));
         result.addAll(childrenBySuffix.getOrDefault(suffix, new LinkedList<>()));
         return result;
     }
