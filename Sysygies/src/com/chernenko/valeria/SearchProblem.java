@@ -1,15 +1,13 @@
 package com.chernenko.valeria;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SearchProblem {
     private final String start;
     private final String goal;
     private final HashMap<String, LinkedList<String>> childrenByPrefix;
     private final HashMap<String, LinkedList<String>> childrenBySuffix;
+    private HashSet<String> usedWords = null;
     private SearchSolution solution = null;
 
     public SearchProblem(String start, String goal,

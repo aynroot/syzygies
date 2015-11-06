@@ -27,11 +27,14 @@ public class Main {
         SearchProblem problem = new SearchProblem(start, goal,
                 wordsPreprocessor.getChildrenByPrefix(), wordsPreprocessor.getChildrenBySuffix());
         logger.info("Solving problem...");
+
+        long startTime = System.nanoTime();
         IterativeDeepeningSearch iterativeDeepeningSearch = new IterativeDeepeningSearch(problem);
         SearchResult result = iterativeDeepeningSearch.run();
         SearchSolution solution = result.equals(SearchResult.SUCCESS) ? problem.getSolution() : null;
+        long endTime = System.nanoTime();
         if (solution != null) {
-            System.out.print("\nSolution:\t");
+            System.out.print(String.format("\nSolution (%.2fs):\t", (endTime - startTime) / 1000000000.0));
             System.out.println(solution.getSteps());
         } else {
             System.out.println("FAILURE");
